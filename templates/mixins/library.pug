@@ -1,0 +1,12 @@
+mixin post-box(title, image, author, href)
+  .col-xs-6.col-md-4.blog-content-block
+    article.article-block
+      .image
+        a(href=href, title=title)
+          img(src=image)
+          .article-hover-block
+            .search-zoom-icon.zoom-icon
+      .desc
+        h4= title
+        span by #{author.name.full}
+          

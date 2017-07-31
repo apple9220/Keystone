@@ -1,0 +1,34 @@
+
+  
+
+mixin service-block(title, image, description, href, list)
+  .block
+    .container
+      .row
+        .col-md-3.col-xs-4.informations-block
+          img(src=image)
+        .col-md-6.col-xs-8.informations-block
+          h2= title
+          if description
+            h4= description
+          ul
+            each item in list
+              li= item
+        .col-md-3.col-xs-4.informations-block
+          button.btn.btn-primary Learn More
+          
+mixin service-header(messages)
+  .block
+    .container
+      .row
+        .col-md-3.col-xs-4.informations-block
+          img(src='images/info.png')
+        .col-md-6.col-xs-8.informations-block
+          h2 Company Formation Worldwide
+          h4 Starting from $560
+          ul
+            li Available across 5 continents, in 50+ countries
+            li Corporate packages to start your business right away
+            li Company administration and expert legal support
+        .col-md-3.col-xs-4.informations-block
+          button.btn.btn-primary Learn More

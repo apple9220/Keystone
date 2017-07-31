@@ -1,0 +1,18 @@
+section.packages.first.packages-desktop
+  .container
+    h2
+      span Business Start-Up Packs
+      a(href='index.html#') See all Start-Up Packs
+    .row
+      each package in packages
+        .col-md-3.col-xs-6.packages-mobile
+          .package
+            .img
+              img(src='images/doc2.png')
+            h6= package.name
+            div!= package.features
+            h5
+              | $#{package.price} 
+              span VALUE $#{package.value}
+            button.btn.btn-green Learn More
+        

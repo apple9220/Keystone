@@ -1,0 +1,51 @@
+include ../mixins/flash-messages
+include ../mixins/service-headers
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    block title
+      title Agent Legal
+    link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
+    link(href='https://fonts.googleapis.com/css?family=Oswald', rel='stylesheet')
+    link(href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300', rel='stylesheet')
+    link(rel='stylesheet', href='/styles/font-awesome.min.css', type='text/css')
+    link(href='/styles/site.css', rel='stylesheet')
+    script(src='https://js.stripe.com/v3/')
+    
+
+    if user && user.canAccessKeystone
+      link(href="/keystone/styles/content/editor.min.css", rel="stylesheet")
+    //if lt IE 9
+      script(src='//cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.js')
+      script(src='//cdn.jsdelivr.net/respond/1.4.2/respond.min.js')
+  body
+    .main-content-overflow
+      include ../partials/navigation
+
+      #body
+
+        +flash-messages(messages)
+        
+        main
+          block content
+          include ../partials/callUs
+          include ../partials/footer
+          
+  
+      script(src='/js/jquery/jquery-1.11.3.min.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js')
+      script.
+        $(document).ready(function() {
+        $('#flash-messages').fadeIn('slow').delay(4000).fadeOut('slow');
+        $(".menu-bar-home").click(function(){
+        $(".left-menu-block").toggleClass("left-menu-left");
+        $(".main-content").toggleClass("main-content-right");
+        });
+        });
+        
+      block js
+      if user && user.canAccessKeystone
+        script(src='/keystone/js/content/editor.js')

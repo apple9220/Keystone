@@ -1,0 +1,217 @@
+extends ../layouts/library
+
+mixin post(post)
+  .post(data-ks-editable=editable(user, { list: 'Post', id: post.id }))
+    h2: a(href='/blog/post/' + post.slug)= post.title
+    p.lead.text-muted Posted 
+      if post.publishedDate
+        | on #{post._.publishedDate.format('MMMM Do, YYYY')} 
+      if post.categories && post.categories.length
+        | in 
+        each cat, i in post.categories
+          a(href='/blog/' + cat.key)= cat.name
+          if i < post.categories.length - 1
+            | , 
+          else
+            |  
+      if post.author
+        | by #{post.author.name.first}
+    if post.image.exists
+      img(src=post._.image.fit(160,160)).img.pull-right
+    p!= post.content.brief
+    if post.content.extended
+      p.read-more: a(href='/blog/post/' + post.slug) Read more...
+
+block content
+  header
+    .banner
+      .container
+        h2 Starting Business Library
+        p
+          | A comprehensive resource that provides businesses and entrepreneurs with the necessary tools,
+          | guidance,
+          br
+          |                 and insights to start, operate, and grow their own business.
+      .images
+        .text-center
+          .category
+            a.title(href='http://dev.mishatechnologies.com/business-startup')
+              | BUSINESS
+              br
+              |                         STARTUP
+              br
+            a(href='http://dev.mishatechnologies.com/business-startup')
+              img(src='images/business-startup.jpg')
+          .category
+            a.title(href='http://dev.mishatechnologies.com/business-management')
+              | BUSINESS
+              br
+              |                         MANAGEMENT
+              br
+            a(href='http://dev.mishatechnologies.com/business-management')
+              img(src='images/business-management.jpg')
+          .category
+            a.title(href='http://dev.mishatechnologies.com/tax-planning')
+              | TAX
+              br
+              |                         PLANNING
+              br
+            a(href='http://dev.mishatechnologies.com/tax-planning')
+              img(src='images/tax-planning.jpg')
+          .category
+            a.title(href='http://dev.mishatechnologies.com/banking-solutions')
+              | BANKING
+              br
+              |                         SOLUTIONS
+              br
+            a(href='http://dev.mishatechnologies.com/banking-solutions')
+              img(src='images/banking-solutions.jpg')
+          .category
+            a.title(href='http://dev.mishatechnologies.com/wealth-management')
+              | WEALTH
+              br
+              |                         MANAGEMENT
+              br
+            a(href='http://dev.mishatechnologies.com/wealth-management')
+              img(src='images/wealth-management.jpg')
+          .category
+            a.title(href='http://dev.mishatechnologies.com/investment-ideas')
+              | INVESTMENT
+              br
+              |                         IDEAS
+              br
+            a(href='http://dev.mishatechnologies.com/investment-ideas')
+              img(src='images/investment-ideas.jpg')
+          .category
+            a.title(href='http://dev.mishatechnologies.com/personal-finance')
+              | PERSONAL
+              br
+              |                         FINANCE
+              br
+            a(href='http://dev.mishatechnologies.com/personal-finance')
+              img(src='images/personal-finance.jpg')
+      .images-slider
+        // - test -
+        #myCarousel.carousel.slide(data-ride='carousel', data-type='multi', data-interval='3000')
+          .carousel-inner
+            .item.active
+              .col-md-2.col-sm-3.col-xs-4.images-slider-block
+                .category-slider
+                  a.title(href='http://dev.mishatechnologies.com/business-startup')
+                    | BUSINESS
+                    br
+                    | 									STARTUP
+                    br
+                  a(href='http://dev.mishatechnologies.com/business-startup')
+                    img(src='images/business-startup.jpg')
+            .item
+              .col-md-2.col-sm-3.col-xs-4.images-slider-block
+                .category-slider
+                  a.title(href='http://dev.mishatechnologies.com/business-management')
+                    | BUSINESS
+                    br
+                    | 									MANAGEMENT
+                    br
+                  a(href='http://dev.mishatechnologies.com/business-management')
+                    img(src='images/business-management.jpg')
+            .item
+              .col-md-2.col-sm-3.col-xs-4.images-slider-block
+                .category-slider
+                  a.title(href='http://dev.mishatechnologies.com/tax-planning')
+                    | TAX
+                    br
+                    | 									PLANNING
+                    br
+                  a(href='http://dev.mishatechnologies.com/tax-planning')
+                    img(src='images/tax-planning.jpg')
+            .item
+              .col-md-2.col-sm-3.col-xs-4.images-slider-block
+                .category-slider
+                  a.title(href='http://dev.mishatechnologies.com/banking-solutions')
+                    | BANKING
+                    br
+                    | 									SOLUTIONS
+                    br
+                  a(href='http://dev.mishatechnologies.com/banking-solutions')
+                    img(src='images/banking-solutions.jpg')
+            .item
+              .col-md-2.col-sm-3.col-xs-4.images-slider-block
+                .category-slider
+                  a.title(href='http://dev.mishatechnologies.com/wealth-management')
+                    | WEALTH
+                    br
+                    | 									MANAGEMENT
+                    br
+                  a(href='http://dev.mishatechnologies.com/wealth-management')
+                    img(src='images/wealth-management.jpg')
+            .item
+              .col-md-2.col-sm-3.col-xs-4.images-slider-block
+                .category-slider
+                  a.title(href='http://dev.mishatechnologies.com/investment-ideas')
+                    | INVESTMENT
+                    br
+                    | 									IDEAS
+                    br
+                  a(href='http://dev.mishatechnologies.com/investment-ideas')
+                    img(src='images/investment-ideas.jpg')
+            .item
+              .col-md-2.col-sm-3.col-xs-4.images-slider-block
+                .category-slider
+                  a.title(href='http://dev.mishatechnologies.com/personal-finance')
+                    | PERSONAL
+                    br
+                    | 									FINANCE
+                    br
+                  a(href='http://dev.mishatechnologies.com/personal-finance')
+                    img(src='images/personal-finance.jpg')
+          a.left.carousel-control(href='blog.html#myCarousel', data-slide='prev')
+            i.fa.fa-chevron-left(aria-hidden='true')
+          a.right.carousel-control(href='blog.html#myCarousel', data-slide='next')
+            i.fa.fa-chevron-right(aria-hidden='true')
+    // - test -
+
+  main
+  section.blog
+    .container
+      h2 Latest Entries
+      .row
+        if data.posts.results.length
+          each post in data.posts.results
+            +post-box(post.title,post._.image.limit(1200,800),post.author,'#')
+
+      // button.btn-gray Load more
+
+block js
+  script.
+    $(document).ready(function() {
+    $(".menu-bar-btn").click(function(){
+    $(".left-menu-block").toggleClass("left-menu-left");
+    $(".main-content").toggleClass("main-content-right");
+    });
+    $("header nav .shop-header .search").click(function(){
+    $(".search-form-cont").toggleClass("search-form-show");
+    });
+    });
+  script.
+    $('.carousel[data-type="multi"] .item').each(function(){
+    var next = $(this).next();
+    if (!next.length) {
+    next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+    for (var i=0;i<4;i++) {if (window.CP.shouldStopExecution(1)){break;}
+    next=next.next();
+    if (!next.length) {
+    next = $(this).siblings(':first');
+    }
+    next.children(':first-child').clone().appendTo($(this));
+    }
+    window.CP.exitedLoop(1);
+    });
+    //# sourceURL=pen.js
+
+  
+  
+  
+  
+  

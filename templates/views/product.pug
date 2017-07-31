@@ -1,0 +1,26 @@
+extends ../layouts/default
+
+block content
+  .banner
+  section: .container
+    h1= product.title
+    h3= product.price
+    h4= product.id
+    button.btn.btn-primary#add-to-cart(onClick="addToCart('" + product.id + "','" + product.price + "')") Add to Cart
+  
+  #cartModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+    .modal-dialog(role='document')
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-label='Close')
+            span(aria-hidden='true') ×
+        .modal-body
+          h2 #{product.title} has been added to your cart.
+        .modal-footer
+          button.btn.btn-default(type='button', data-dismiss='modal') Continue Shopping
+          a.btn.btn-primary(type='button', href="/cart") View Cart
+
+
+block js
+       script(src='/js/cart.js')
+    

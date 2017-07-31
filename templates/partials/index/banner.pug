@@ -1,0 +1,61 @@
+.banner.banner-desktop
+  .container
+    h2
+      | HELPING BUSINESSES 
+      strong GET UP & RUNNING
+    .row
+      .col-md-3.col-xs-3
+        .block
+          img(src='images/icon.png')
+          h3 Company Formation
+      .col-md-3.col-xs-3
+        .block
+          img(src='images/bank.png')
+          h3 Bank Account Opening
+      .col-md-3.col-xs-3
+        .block
+          img(src='images/trademark.png')
+          h3 Trademark Registration
+      .col-md-3.col-xs-3
+        .block
+          img(src='images/document.png')
+          h3 Document Templates
+.banner.banner-moblie(style='display: none;')
+  .container
+    h2
+      | HELPING BUSINESSES 
+      strong GET UP & RUNNING
+    .row
+      // Indicators
+      #myCarousel.carousel.slide(data-ride='carousel')
+        // Wrapper for slides
+        .carousel-inner(role='listbox')
+          .item.active
+            .col-md-3.col-xs-3.block-banner
+              .block
+                img(src='images/icon.png')
+                h3 Company Formation
+          .item
+            .col-md-3.col-xs-3.block-banner
+              .block
+                img(src='images/bank.png')
+                h3 Bank Account Opening
+          .item
+            .col-md-3.col-xs-3.block-banner
+              .block
+                img(src='images/trademark.png')
+                h3 Trademark Registration
+          .item
+            .col-md-3.col-xs-3.block-banner
+              .block
+                img(src='images/document.png')
+                h3 Document Templates
+        ol.carousel-indicators
+          li.active(data-target='#myCarousel', data-slide-to='0')
+          li(data-target='#myCarousel', data-slide-to='1')
+          li(data-target='#myCarousel', data-slide-to='2')
+          li(data-target='#myCarousel', data-slide-to='3')
+.call-to-action
+  h3
+    | Check out our Special Offers
+    button.btn.btn-green See Offers

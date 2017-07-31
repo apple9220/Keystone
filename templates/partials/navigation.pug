@@ -1,0 +1,83 @@
+
+aside.left-menu.left-menu-block(style='display: none;')
+  .nav-menu.no-border
+    ul
+      li.left-menu-search
+        img(src='/images/logo.png', style="width: 154px")
+          
+      .show-for-small-only(style='display: none;')
+        li
+          label Account
+        li
+          a(href='http://dev.mishatechnologies.com/account/index.php') Login
+        li.brd-bottom-menu(style='padding:10px 8px 5px 10px;')
+          .inl-block.width-100
+            span.left.mar-top-5 Currency
+            form#SelectCurrFormOffCanvas(name='SelectCurrForm', action='', method='post')
+              input(type='hidden', name='get_current_url', value='https://www.startingbusiness.com/')
+              select#select_currency_off_canvas.fnt-cond-light.no-margin.width-18.right.brd-none(name='select_currency')
+                option(value='USD', selected='selected') USD
+                option(value='EUR') EUR
+                option(value='GBP') GBP
+      li.left-menu-title Navigate
+      each parent in navLinks
+        li.cursor-point(class=(section == parent.key ? 'active' : null))
+          a(href=parent.href)= parent.label
+          if parent.children
+            ul.list-with-ticks
+              each child in childLinks
+                if child.childKey === parent.key
+                  each link in child.links
+                    li
+                      a(href=link.href)
+                        span.mar-rgh-10  > 
+                        span= link.label
+
+
+
+
+// *********************
+// Desktop menu
+// *********************
+
+.main-content
+  header
+    nav
+      .dekstop-hide
+        button.menu-bar-home
+        .logo-mb
+          a(href='/')
+            span: img(src='images/logo.png' style="width: 154px")
+      .container
+        .menu
+          ul
+            li.logo
+              a(href='/'): img(src='/images/logo.png' style="width: 154px")
+            each parent in navLinks
+              li(class=(section == parent.key ? 'active' : '') + (parent.children == true ? 'dropdown div-hover' : null))
+                if parent.children
+                  a.dropdown-toggle(href=parent.href, data-toggle='dropdown', aria-expanded='false')
+                    | #{parent.label}
+                    i.fa.fa-chevron-down(aria-hidden='true', style='margin-left: 10px;')
+                  ul.dropdown-menu.service-menu
+                    each child in childLinks
+                      if child.childKey === parent.key
+                        each link in child.links
+                          li: a(href=link.href)= link.label
+                else
+                  a(href=parent.href)= parent.label
+
+        .shop-header
+          ul
+            li: select
+              option USD
+              option EUR
+              option GBP
+            li: a(href="/cart")
+              i.fa.fa-shopping-cart
+                div#count= itemCount
+              
+            li
+              i.fa.fa-user
+              a(href='/')
+                span Login

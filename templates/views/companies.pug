@@ -1,0 +1,417 @@
+extends ../layouts/default
+
+mixin country-box(title, price, slug)
+  .col-md-12.small-panel
+    .col-md-6.lar-width-48
+      .left
+        img.flg-sml(src='images/flag-01.png')
+      span.left.pad-lf-10.fnt-cond-light.fnt-size-21= title
+    .col-md-6.lar-width-48
+      .inl-block
+        p.fnt-size-21.fnt-oswald-medium.no-margin.mar-top-10.mar-rgh-20.left= price
+        a.button.green.small.text-center.pad-tb-3-lr-20.left.hide-for-small-only(href='/product/' + slug)
+          | Learn
+          | More
+
+block content
+  main.compnay-page
+    section.informations
+      .block
+        .container
+          .row
+            .col-md-3.col-xs-4.informations-block
+              img(src='images/info.png')
+            .col-md-6.col-xs-8.informations-block
+              h2 Company Formation Worldwide
+              h4 Starting from $560
+              ul
+                li Available across 5 continents, in 50+ countries
+                li Corporate packages to start your business right away
+                li Company administration and expert legal support
+        .container
+          .row
+            .col-md-4
+              p.step-text
+                | Set up your New Company
+                | in 4 STEPS
+            .col-md-8
+              .step-img
+    section.panel-start
+      .container
+        .row
+          .panel
+            .col-md-6
+              h6.fnt-size-24.mob-fnt-size-21 Select your country formation
+            .col-md-6
+              select.no-margin.height-45.brd-grey(name='category')
+                option(value='-1') Select a Country
+                if products[0]
+                  each product, index in products
+                    option(value=index)= product.country
+                
+    section.locations
+      .container
+        .row
+          .panel
+            .col-md-12.text-center
+              h6.fnt-size-24.mob-fnt-size-21 Popular Company Formation Locations...
+            .col-md-6.remove-space(style='padding: 0 8px 0 0')
+              - console.log(products)
+              if products[0]
+                each country in products
+                  +country-box(country.title, country.price, country.slug)
+              else
+                h5 There are no products that match your request.
+    section.browse-companies
+      .container
+        .row
+          .panel-two
+            .col-md-6.col-sm-6
+              h6.fnt-size-24.mob-fnt-size-21 Browse Companies by Region
+            .col-md-6.col-sm-6.btn-hide
+              a.button-green(href='#', title='Jurisdictions')
+                .inl-block.mar-top-5
+                  span.fnt-oswald-medium.fnt-size-21 Compare Companies
+                  .sprite1.magnify_green.right.mar-lf-10.mar-top-m-4
+          #accordion.panel-group
+            if regions[0]
+              each region in regions
+                .panel.panel-default
+                  a(href='#1')
+                    #accordion-toggle-1.panel-heading.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#accordion', data-target='#collapseOne', aria-expanded='false')
+                      h4.panel-title= region
+                  #collapseOne.panel-collapse.collapse(aria-expanded='false', style='height: 0px;')
+                    .panel-body
+                      table.width-100.brd-none(style='width: 100%;')
+                        tbody
+                          each product in products
+                            if product.region == region
+                              tr
+                                td.country.lar-width-60
+                                  .hide-for-small-down.left.mar-top-7
+                                    img.flg-mdl(src='images/a-flag-01.png')
+                                  .left.pad-lf-20.fnt-cond-light.fnt-size-21.mob-pad-0.ln-h-22
+                                    h3.fnt-size-21.no-margin.ln-h-12
+                                      if product.country
+                                        span= product.country
+                                    h3.fnt-size-19.clr-l-grey.no-margin.ln-h-12
+                                      span= product.title
+                                td.text-center.mob-width-45
+                                  .inl-block.right
+                                    .left.mar-rgh-20.mob-mar-rgh-0
+                                      p.fnt-size-21.mob-fnt-size-21.fnt-oswald-medium.no-margin.mar-top-10= product.price
+                                      .mar-top-10.show-for-small-only.width-100.text-right
+                                        a.clr-green.fnt-oswald-light.fnt-size-14.text-left(href='/product/' + product.slug)
+                                          | Learn
+                                          | More
+                                    .right
+                                      a.button.fnt-size-21.fnt-oswald-medium.green.hide-for-small-only.width-155.pad-tb-3-lr-15(href='/product/' + product.slug)
+                                        | Learn
+                                        | More
+            else
+              h3 There are no products that match your request.          
+                      
+          .col-md-6.col-sm-6.btn-show(style='display: none;')
+            a.button-green(href='#', title='Jurisdictions')
+              .inl-block.mar-top-5
+                span.fnt-oswald-medium.fnt-size-21 Compare Companies
+                .sprite1.magnify_green.right.mar-lf-10.mar-top-m-4
+    section.tabbing-verticallay
+      .container
+        .row
+          h1 Everything you need to know
+          .tab
+            button#defaultOpen.tablinks(onclick="openCity(event, 'London')") Our services include
+            button.tablinks(onclick="openCity(event, 'Paris')") Documents Required
+            button.tablinks(onclick="openCity(event, 'Tokyo')") Business Activities
+            button.tablinks(onclick="openCity(event, 'Tokyo2')") Shipping Cost
+          #London.tabcontent
+            div
+              p Our standard services include
+              ul
+                li Name check and approval;
+                li Filling the incorporation documents with the Registrar of Companies;
+                li A standard set of original corporate documents;
+                li Payment of the Government Fee for one year;
+                li Provision of registered agent and registered address for one year.
+                li Provision of company secretary for one year;
+                li Rubber stamp;
+                li A standard set of original corporate documents;
+                li Certificate of Incorporation;
+                li Memorandum & Articles of Association;
+                li Appointment of First Directors;
+                li Consent Actions of the Board of Directors;
+                li Share Certificates;
+                li Register of Directors and Members;
+              p
+                | Please note that the above services and documents may vary, depending on legal structure and
+                | jurisdiction
+                | chosen.
+          #Paris.tabcontent
+            div
+              p
+                | Please provide the following documents for all Directors, Shareholders, Beneficial Owners, Authorized Signatories:
+              ul
+                li
+                  strong Notarized copy of valid passport.
+                  |  The passport must be signed and signature must match the signature in the application form. The photograph must be clear and of good quality.
+                li
+                  strong Original or Certified copy of utility bill / bank statement
+                  |  (as verification of residential address, dated within 3 months); the household utility bill (e.g. gas, electricity, water or fixed line telephone but 
+                  strong not a mobile phone bill
+                  | ) or bank, building society or credit card statement as proof of address.  It must be no more than 3 months old and show your name and current address. P.O. Box is not accepted.
+                li
+                  strong Original or certified copy of Banker�s reference letter
+                  |  (dated within 3 months). You can request the Reference Letter from the bank where you hold an account. The reference letter should include confirmation that the relationship has been maintain for longer than 2 years and the business affairs are run satisfactorily.
+                li
+                  strong
+                    | In cases where shareholders and/or directors are corporate bodies, full apostilled set of corporate documents will be required:
+                  |  Certificate of Incorporation, List of Directors, Shareholders, Secretary, Share Certificate, copy of �Declaration of Trust� between nominee shareholder(s) and ultimate beneficial owner(s) (if applicable), Certificate of Good Standing (if the company has been operating for 12 months or more); Notarized copy of a valid passport, utility bill and the reference letter for each individual Director, Shareholder and Beneficial Owner.
+          #Tokyo.tabcontent
+            section#panel2-3.content.pad-0.active(role='tabpanel', aria-hidden='false')
+              p
+                | We operate across a wide range of business activities however, several types of businesses
+                | currently
+                | are
+                | not approved by Starting Business.
+              p
+                strong Licensable Activities:
+                |  If you conduct any activity without required license or
+                |                                         authorization granted by a relevant authority in any jurisdiction, Starting Business will not be able to
+                |                                         assist
+                |                                         you
+                |                                         with the or bank account opening related to such unlicensed activity.
+              p
+                | Licensable activities include, but not limited to: provision of financial services involving
+                | trading/brokerage in foreign exchange, financial and commodity-based derivative instruments and
+                | other
+                | securities; offering investment advice to public; insurance and banking business; operation and
+                | administration of collective investment schemes and mutual funds; payment processing services;
+                | money
+                | exchange, money transmission or money brokering; asset management; safe custody services;
+                | gaming,
+                | gambling and lotteries.
+              p
+                strong
+                  | Please 
+                  a(href='mailto:sales@startingbusiness.com') contact us
+                  |  if you need our assistance in
+                  |                                             licensing
+                  |                                             of
+                  |                                             your financial, Forex brokerage or gambling company.
+              p
+                | The following categories of businesses are prohibited from using Starting Business services:
+              ul
+                li
+                  | Any illegal or criminal activities or individuals that black listed under the laws of any
+                  | country;
+                li
+                  | Trade, distribution or manufacturing of arms, weapons, munitions, mercenary or contract
+                  | soldiering;
+                li
+                  | Any device that could lead to the abuse of human rights or be utilized for torture;
+                li Technical surveillance or bugging equipment or industrial espionage;
+                li
+                  | Dangerous or hazardous biological, chemical or nuclear materials including equipment or
+                  | machinery
+                  | used to manufacture, handle or dispose of such materials;
+                li
+                  | Human or animal organs, the abuse of animals or use of animals for any scientific or product
+                  | testing;
+                li Genetic material;
+                li Adoption agencies, including surrogate motherhood; the abuse of human rights;
+                li Pornography;
+                li Drug paraphernalia;
+                li Pyramid sales;
+                li Religious cults and their charities;
+                li
+                  | Business activities, which by the laws and regulations of the country of formation of the
+                  | Entity
+                  | are
+                  | subject to licensing and which are conducted without obtainment of a license;
+                li
+                  | Any other activity, which, in the opinion of Starting Business, may damage the reputation of Starting Business or
+                  | that
+                  | of
+                  | the country of formation of the Entity.
+          #Tokyo2.tabcontent
+            div
+              p
+                | Shipping of corporate documents or banking kits to your destination requires an extra charge and
+                | will
+                | be
+                | automatically added to the invoice during checkout. Shipping costs for international courier
+                | services
+                | are set automatically and can vary from USD 75 to USD 95. The fees depend on the jurisdiction
+                | of
+                | your
+                | ordered company, the country where the bank is based as well as your destination country.
+    section.tabbing-verticallay.tabbing-verticallay-mobile(style='display: none;')
+      .container
+        h1 Everything you need to know
+        #accordion1.panel-group
+          .panel.panel-default
+            .panel-heading.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#accordion1', data-target='#collapse-08', aria-expanded='false')
+              h4.panel-title Our services include
+            #collapse-08.panel-collapse.collapse(aria-expanded='false', style='height: 0px;')
+              .panel-body
+                #London.tabcontent1(style='display: block !important;')
+                  div
+                    p Our standard services include
+                    ul
+                      li Name check and approval;
+                      li Filling the incorporation documents with the Registrar of Companies;
+                      li A standard set of original corporate documents;
+                      li Payment of the Government Fee for one year;
+                      li Provision of registered agent and registered address for one year.
+                      li Provision of company secretary for one year;
+                      li Rubber stamp;
+                      li A standard set of original corporate documents;
+                      li Certificate of Incorporation;
+                      li Memorandum & Articles of Association;
+                      li Appointment of First Directors;
+                      li Consent Actions of the Board of Directors;
+                      li Share Certificates;
+                      li Register of Directors and Members;
+                    p
+                      | Please note that the above services and documents may vary, depending on legal structure and
+                      | jurisdiction
+                      | chosen.
+          .panel.panel-default
+            .panel-heading.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#accordion1', data-target='#collapse-09', aria-expanded='false')
+              h4.panel-title Documents Required
+            #collapse-09.panel-collapse.collapse(aria-expanded='false')
+              .panel-body
+                #Paris.tabcontent1
+                  div
+                    p
+                      | Please provide the following documents for all Directors, Shareholders, Beneficial Owners, Authorized Signatories:
+                    ul
+                      li
+                        strong Notarized copy of valid passport.
+                        |  The passport must be signed and signature must match the signature in the application form. The photograph must be clear and of good quality.
+                      li
+                        strong Original or Certified copy of utility bill / bank statement
+                        |  (as verification of residential address, dated within 3 months); the household utility bill (e.g. gas, electricity, water or fixed line telephone but 
+                        strong not a mobile phone bill
+                        | ) or bank, building society or credit card statement as proof of address.  It must be no more than 3 months old and show your name and current address. P.O. Box is not accepted.
+                      li
+                        strong Original or certified copy of Banker�s reference letter
+                        |  (dated within 3 months). You can request the Reference Letter from the bank where you hold an account. The reference letter should include confirmation that the relationship has been maintain for longer than 2 years and the business affairs are run satisfactorily.
+                      li
+                        strong
+                          | In cases where shareholders and/or directors are corporate bodies, full apostilled set of corporate documents will be required:
+                        |  Certificate of Incorporation, List of Directors, Shareholders, Secretary, Share Certificate, copy of �Declaration of Trust� between nominee shareholder(s) and ultimate beneficial owner(s) (if applicable), Certificate of Good Standing (if the company has been operating for 12 months or more); Notarized copy of a valid passport, utility bill and the reference letter for each individual Director, Shareholder and Beneficial Owner.
+          .panel.panel-default
+            .panel-heading.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#accordion1', data-target='#collapse-10', aria-expanded='false')
+              h4.panel-title Business Activities
+            #collapse-10.panel-collapse.collapse(aria-expanded='false')
+              .panel-body
+                #Tokyo.tabcontent1
+                  section#panel2-3.content.pad-0.active(role='tabpanel', aria-hidden='false')
+                    p
+                      | We operate across a wide range of business activities however, several types of businesses
+                      | currently
+                      | are
+                      | not approved by Starting Business.
+                    p
+                      strong Licensable Activities:
+                      |  If you conduct any activity without required license or
+                      |                                                     authorization granted by a relevant authority in any jurisdiction, Starting Business will not be able to
+                      |                                                     assist
+                      |                                                     you
+                      |                                                     with the or bank account opening related to such unlicensed activity.
+                    p
+                      | Licensable activities include, but not limited to: provision of financial services involving
+                      | trading/brokerage in foreign exchange, financial and commodity-based derivative instruments and
+                      | other
+                      | securities; offering investment advice to public; insurance and banking business; operation and
+                      | administration of collective investment schemes and mutual funds; payment processing services;
+                      | money
+                      | exchange, money transmission or money brokering; asset management; safe custody services;
+                      | gaming,
+                      | gambling and lotteries.
+                    p
+                      strong
+                        | Please 
+                        a(href='mailto:sales@startingbusiness.com') contact us
+                        |  if you need our assistance in
+                        |                                                         licensing
+                        |                                                         of
+                        |                                                         your financial, Forex brokerage or gambling company.
+                    p
+                      | The following categories of businesses are prohibited from using Starting Business services:
+                    ul
+                      li
+                        | Any illegal or criminal activities or individuals that black listed under the laws of any
+                        | country;
+                      li
+                        | Trade, distribution or manufacturing of arms, weapons, munitions, mercenary or contract
+                        | soldiering;
+                      li
+                        | Any device that could lead to the abuse of human rights or be utilized for torture;
+                      li Technical surveillance or bugging equipment or industrial espionage;
+                      li
+                        | Dangerous or hazardous biological, chemical or nuclear materials including equipment or
+                        | machinery
+                        | used to manufacture, handle or dispose of such materials;
+                      li
+                        | Human or animal organs, the abuse of animals or use of animals for any scientific or product
+                        | testing;
+                      li Genetic material;
+                      li Adoption agencies, including surrogate motherhood; the abuse of human rights;
+                      li Pornography;
+                      li Drug paraphernalia;
+                      li Pyramid sales;
+                      li Religious cults and their charities;
+                      li
+                        | Business activities, which by the laws and regulations of the country of formation of the
+                        | Entity
+                        | are
+                        | subject to licensing and which are conducted without obtainment of a license;
+                      li
+                        | Any other activity, which, in the opinion of Starting Business, may damage the reputation of Starting Business or
+                        | that
+                        | of
+                        | the country of formation of the Entity.
+          .panel.panel-default
+            .panel-heading.accordion-toggle.collapsed(data-toggle='collapse', data-parent='#accordion1', data-target='#collapse-11', aria-expanded='false')
+              h4.panel-title Shipping Cost
+            #collapse-11.panel-collapse.collapse(aria-expanded='false')
+              .panel-body
+                #Tokyo2.tabcontent1
+                  div
+                    p
+                      | Shipping of corporate documents or banking kits to your destination requires an extra charge and
+                      | will
+                      | be
+                      | automatically added to the invoice during checkout. Shipping costs for international courier
+                      | services
+                      | are set automatically and can vary from USD 75 to USD 95. The fees depend on the jurisdiction
+                      | of
+                      | your
+                      | ordered company, the country where the bank is based as well as your destination country.
+
+block js
+  script.
+    $(document).ready(function () {
+    $(".menu-bar-home").click(function () {
+    $(".left-menu-block").toggleClass("left-menu-left");
+    $(".main-content").toggleClass("main-content-right");
+    });
+    });
+    function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+    }
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();

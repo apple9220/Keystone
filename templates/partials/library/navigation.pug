@@ -1,0 +1,60 @@
+aside.left-menu.left-menu-block
+  .nav-menu.no-border
+    ul
+      li.left-menu-search
+        form#search_articles_form_left(action='/search/articles/simple', accept-charset='UTF-8', method='get')
+          input(name='utf8', type='hidden', value='')
+          input#inputSearchArticlesHeaderLeft(type='text', name='words')
+          input.search-button-icon.icon-img.medium.small-light-grey-search(type='submit', name='commit', value='')
+      li.left-menu-title Browse Categories
+      li.cursor-point
+        a(href='http://library.startingbusiness.com/business-startup') Business Startup
+      li.cursor-point
+        a(href='http://library.startingbusiness.com/business-management') Business Management
+      li.cursor-point
+        a(href='http://library.startingbusiness.com/tax-planning') Tax Planning
+      li.cursor-point
+        a(href='http://library.startingbusiness.com/banking-solutions') Banking Solutions
+      li.cursor-point
+        a(href='http://library.startingbusiness.com/wealth-management') Wealth Management
+      li.cursor-point
+        a(href='http://library.startingbusiness.com/investment-ideas') Investment Ideas
+      li.cursor-point
+        a(href='http://library.startingbusiness.com/personal-finance') Personal Finance
+      a(href='https://www.startingbusiness.com/', target='_blank')
+        li.display-inl-block.full-width.store-link
+          .display-inl-block.v-align-middle.icon-img.small.cart-black
+          span.v-align-middle.m-left-10.font-medium.display-inline.no-padding Store
+          
+          
+.main-content
+  header
+    nav
+      .menu
+        button.menu-bar-btn
+          span
+          span
+          span
+        a.menu-logo(href='#')
+          span
+            img(src='images/logo.svg')
+      .shop-header
+        .social.social-block
+          a(href='#', target='_blank')
+            i.fa.fa-facebook
+          a(href='#', target='_blank')
+            i.fa.fa-twitter
+          a(href='#', target='_blank')
+            i.fa.fa-linkedin
+          a(href='#', target='_blank')
+            i.fa.fa-google-plus
+        .shopping-cart
+          i.fa.fa-shopping-cart
+          span Store
+        .search
+          i.fa.fa-search
+        #searchFormHeaderLarge.search-form-cont(data-dropdown-content='', style='position: absolute;top: 60px;', aria-hidden='false')
+          form#search_articles_form.text-center(action='/search/articles/simple', accept-charset='UTF-8', method='get')
+            input(name='utf8', type='hidden', value='')
+            input#inputSearchArticlesHeader.search-field(type='text', name='words')
+            input.primary-btn(type='submit', name='commit', value='Search')

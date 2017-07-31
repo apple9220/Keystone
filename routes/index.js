@@ -1,0 +1,67 @@
+/**
+ * This file is where you define your application routes and controllers.
+ *
+ * Start by including the middleware you want to run for every request;
+ * you can attach middleware to the pre('routes') and pre('render') events.
+ *
+ * For simplicity, the default setup for route controllers is for each to be
+ * in its own file, and we import all the files in the /routes/views directory.
+ *
+ * Each of these files is a route controller, and is responsible for all the
+ * processing that needs to happen for the route (e.g. loading data, handling
+ * form submissions, rendering the view template, etc).
+ *
+ * Bind each route pattern your application should respond to in the function
+ * that is exported from this module, following the examples below.
+ *
+ * See the Express application routing documentation for more information:
+ * http://expressjs.com/api.html#app.VERB
+ */
+
+var keystone = require('keystone');
+var middleware = require('./middleware');
+var importRoutes = keystone.importer(__dirname);
+
+// Common Middleware
+keystone.pre('routes', middleware.initLocals);
+keystone.pre('render', middleware.flashMessages);
+
+// Import Route Controllers
+var routes = {
+	views: importRoutes('./views'),
+  auth: importRoutes('./auth'),
+};
+
+// Setup Route Bindings
+exports = module.exports = function (app) {
+	// Views
+	app.get('/', routes.views.index);
+	app.get('/library', routes.views.blog);
+	app.get('/library/:post', routes.views.post);
+	app.get('/documents', routes.views.documents);
+	app.get('/documents/:category', routes.views.category);
+	app.get('/document/:document', routes.views.document);
+	app.get('/packages', routes.views.packages);
+	app.get('/package/:package', routes.views.package);
+	app.get('/product/:product?', routes.views.product);
+	app.get('/offers', routes.views.products);
+	app.get('/companies', routes.views.companies);
+	app.get('/banks', routes.views.banks);
+	app.get('/additional-services', routes.views.additionalServices);
+	app.get('/trademarks', routes.views.trademarks);
+	app.get('/trademarks/search', routes.views.trademarksSearch);
+	app.get('/trademarks/registration', routes.views.trademarksRegistration);
+	app.get('/trademarks/watch', routes.views.trademarksWatch);
+
+
+
+  // User
+  app.get('/orders', routes.views.user.orders);
+
+
+
+	app.all('/contact', routes.views.contact);
+	// NOTE: To protect a route so that only admins can see it, use the requireUser middleware:
+	// app.get('/protected', middleware.requireUser, routes.views.protected);
+
+};
